@@ -18,9 +18,9 @@
             <h3>
                 REPORTES CON DOMPDF
             </h3>
-            <form>
+            <form action="reportes/rptProductoByCategory.php" method="post" target="_blank"> 
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-4">      
                         <select class="form-control" id="cmbIdCategoria" name="cmbIdCategoria">
                             <option value="">
                                 Seleccione
@@ -32,6 +32,7 @@
                             Reporte 1
                         </button>
                     </div>
+                    
                 </div>
 
             </form>
