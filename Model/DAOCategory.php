@@ -1,6 +1,6 @@
 <?php
 require_once "config.php";
-require_once "Category.php"; // Asegúrate de ajustar la ruta correcta
+require_once "Category.php"; 
 
 class DAOCategory
 {       

@@ -67,14 +67,19 @@ class DAOProduct
     public function rptProductosByCategoria($categoryid)
     {
         $sql = "SELECT p.productid, p.productname, p.supplierid, p.categoryid, p.quantityperunit, ";
-        $sql .= "p.unitprice, p.unitsinstock, p.unitsonorder, p.reorderlevel, p.discontinued, p.trial909 ";
-        $sql .= "FROM products p ";
+        $sql .= "p.unitprice, p.unitsinstock, p.unitsonorder, p.reorderlevel, p.discontinued, p.trial909, ";
+        $sql .= "c.categoryname, pro.companyname FROM products p ";
+        $sql .= "INNER JOIN categories c ON p.categoryid = c.categoryid ";
+        $sql .= "INNER JOIN suppliers pro ON p.supplierid = pro.supplierid ";
         $sql .= "WHERE p.categoryid = $categoryid";
+
+
+
 
         $this->conectar();
         $res = $this->con->query($sql);
 
-        $html = "<table class='table'><thead>";
+        $html = "<table class='table table-bordered'><thead>";
         $html .= "<th>ID</th><th>NOMBRE</th><th>STOCK</th><th>STOCK MIN</th><th>CATEGORIA</th><th>PROVEEDOR</th>";
         $html .= "</thead><tbody>";
 
@@ -98,8 +103,47 @@ class DAOProduct
             $html .= "<td>" . $product->getProductName() . "</td>";
             $html .= "<td>" . $product->getUnitsInStock() . "</td>";
             $html .= "<td>" . $product->getReorderLevel() . "</td>";
-            $html .= "<td>" . $fila["categoryid"] . "</td>";
-            $html .= "<td>" . $fila["supplierid"] . "</td>";
+            $html .= "<td>" . $fila["categoryname"] . "</td>";
+            $html .= "<td>" . $fila["companyname"] . "</td>";
+            $html .= "</tr>";
+            $cont++;
+        }
+        $html .= "</tbody></table>";
+        $res->close();
+        $this->desconectar();
+
+        $data = array();
+        $data[] = $html;
+        $data[] = $cont;
+
+        return $data;
+    }
+
+    public function rptProductosByStock($stock)
+    {
+        $sql = "SELECT p.productid, p.productname, p.unitsinstock FROM products p ";
+        $sql .= "INNER JOIN categories c ON p.categoryid = c.categoryid ";
+        $sql .= "INNER JOIN suppliers pro ON p.supplierid = pro.supplierid ";
+        $sql .= "WHERE p.unitsinstock <= $stock";
+
+        $this->conectar();
+        $res = $this->con->query($sql);
+
+        $html = "<table class='table table-bordered'><thead>";
+        $html .= "<th>ID</th><th>NOMBRE</th><th>STOCK</th>";
+        $html .= "</thead><tbody>";
+
+        $cont = 0;
+        while ($fila = mysqli_fetch_assoc($res)) {
+            $product = new Product();
+            $product->setProductID($fila["productid"])
+                ->setProductName($fila["productname"])
+                ->setUnitsInStock($fila["unitsinstock"]);
+
+            $html .= "<tr>";
+            $html .= "<td>" . $product->getProductID() . "</td>";
+            $html .= "<td>" . $product->getProductName() . "</td>";
+            $html .= "<td>" . $product->getUnitsInStock() . "</td>";
             $html .= "</tr>";
             $cont++;
         }

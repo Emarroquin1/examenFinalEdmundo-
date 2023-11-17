@@ -4,21 +4,20 @@ use Dompdf\Dompdf;
 
 
 require_once 'vendor/autoload.php';
-require_once '../../model/DAOProduct.php';
+require_once '../../model/DAOEmploye.php';
 
-if ($_GET) {
-    if (isset($_GET["cmbIdCategoria"])) {
-        $categoriaId = $_GET["cmbIdCategoria"];
 
-        $dao = new DAOProduct();
-        $data = $dao->rptProductosByCategoria($categoriaId);
-        date_default_timezone_set('America/El_Salvador');
-        $imagen = file_get_contents('../img/Zephyrus.jpg');
-        $imagen_data = base64_encode($imagen);
-        $imagenPath = '<img src="data:image/png;base64, ' . $imagen_data . '"class="logo">';
 
-        $pdf = new Dompdf();
-        $html = "
+
+$dao = new DAOEmploye();
+$data = $dao->rptEmployes();
+date_default_timezone_set('America/El_Salvador');
+$imagen = file_get_contents('../img/Zephyrus.jpg');
+$imagen_data = base64_encode($imagen);
+$imagenPath = '<img src="data:image/png;base64, ' . $imagen_data . '"class="logo">';
+
+$pdf = new Dompdf();
+$html = "
         <html lang='es'>
         <head>
             <meta charset='UTF-8'>
@@ -71,25 +70,21 @@ if ($_GET) {
             <hr>
             <div>
                 <br>
-                <p>LISTADO DE PRODUCTOS POR SU CATEGORIA</p>
+                <p>LISTADO DE EMPLEADOS</p>
                 <hr>
                 <!--En este div pondremos las tablas de datos-->
                 <div style='height:auto;'>
                     " . $data[0] . "
                 </div>
-                <h4 style='text-align: right;'><b>Total Productos " . $data[1] . "</b></h4>
+                <h4 style='text-align: right;'><b>Total de  Empleados " . $data[1] . "</b></h4>
             </div>
             </main>
         </body>
         </html> ";
 
-        $pdf->loadHtml($html);
-        $pdf->setPaper('letter', 'portrait');
-        $pdf->render();
-        $pdf->stream("RPT_Productos_Por_Stock", ['Attachment' => false]);
+$pdf->loadHtml($html);
+$pdf->setPaper('letter', 'portrait');
+$pdf->render();
+$pdf->stream("RPT_Productos_Por_Stock", ['Attachment' => false]);
 
         // Resto de tu código para generar y mostrar el PDF
-    }
-} else {
-    echo "La página no se mandó a llamar correctamente...";
-}

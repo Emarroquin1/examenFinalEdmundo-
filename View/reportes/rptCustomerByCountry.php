@@ -4,14 +4,14 @@ use Dompdf\Dompdf;
 
 
 require_once 'vendor/autoload.php';
-require_once '../../model/DAOProduct.php';
+require_once '../../model/DAOCustomer.php';
 
 if ($_GET) {
-    if (isset($_GET["cmbIdCategoria"])) {
-        $categoriaId = $_GET["cmbIdCategoria"];
+    if (isset($_GET["txtCountry"])) {
+        $country = $_GET["txtCountry"];
 
-        $dao = new DAOProduct();
-        $data = $dao->rptProductosByCategoria($categoriaId);
+        $dao = new DAOCustomer();
+        $data = $dao->rptCustomersByCountry($country);
         date_default_timezone_set('America/El_Salvador');
         $imagen = file_get_contents('../img/Zephyrus.jpg');
         $imagen_data = base64_encode($imagen);
@@ -71,13 +71,13 @@ if ($_GET) {
             <hr>
             <div>
                 <br>
-                <p>LISTADO DE PRODUCTOS POR SU CATEGORIA</p>
+                <p>LISTADO DE CLIENTES DE ".$country."</p>
                 <hr>
                 <!--En este div pondremos las tablas de datos-->
                 <div style='height:auto;'>
                     " . $data[0] . "
                 </div>
-                <h4 style='text-align: right;'><b>Total Productos " . $data[1] . "</b></h4>
+                <h4 style='text-align: right;'><b>Total de  Clientes " . $data[1] . "</b></h4>
             </div>
             </main>
         </body>

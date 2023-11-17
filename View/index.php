@@ -10,17 +10,18 @@
 </head>
 
 <body style="background-color: #b4b4b4;">
-    <div class="container" >
-        <div class="row">
-          
-        </div>
+    <div class="container">
+
         <div class="card">
             <h3>
                 REPORTES CON DOMPDF
             </h3>
-            <form action="reportes/rptProductoByCategory.php" method="post" target="_blank"> 
+            <form action="reportes/rptProductoByCategory.php" method="get" target="_blank">
                 <div class="row">
-                    <div class="col-4">      
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-4">
                         <select class="form-control" id="cmbIdCategoria" name="cmbIdCategoria">
                             <option value="">
                                 Seleccione
@@ -32,11 +33,81 @@
                             Reporte 1
                         </button>
                     </div>
-                    
+
                 </div>
 
             </form>
+            <hr>
+            <form action="reportes/rptCustomerByCountry.php" method="get" target="_blank">
+                <div class="row">
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-4">
+
+                        <label for="txtCountry">
+                            País
+                        </label>
+                        <input class="form-control" id="txtCountry" placeholder="Escriba el País" type="text" name="txtCountry"></input>
+                    </div>
+
+
+                    <div class="col-3">
+                        <br>
+                        <button class="btn btn-primary">
+                            Reporte 2
+                        </button>
+                    </div>
+                </div>
+
+                <br>
+            </form>
+
+            <hr>
+            <form action="reportes/rptProductoByStock.php" method="get" target="_blank">
+                <div class="row">
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-4">
+
+                        <label for="txtCountry">
+                            Cantidad
+                        </label>
+                        <input class="form-control" id="txtCountry" placeholder="Escriba la cantidad" type="number" name="txtStock"></input>
+                    </div>
+
+
+                    <div class="col-3">
+                        <br>
+                        <button class="btn btn-primary">
+                            Reporte 3
+                        </button>
+                    </div>
+                </div>
+
+                <br>
+            </form>
+            <hr>
+            <form action="reportes/rptEmploye.php" method="get" target="_blank">
+                <div class="row text-center">      
+                    <div class="col-5">
+
+                    </div>        
+                    <div class="col-3">
+                        <br>
+                        <button class="btn btn-primary">
+                            Reporte 4
+                        </button>
+                    </div>
+                </div>
+
+                <br>
+            </form>
         </div>
+
+
+    </div>
     </div>
 </body>
 
@@ -62,24 +133,24 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
 
 <script>
+    $(document).ready(function() {
+        getComboCategorias();
+    });
 
-$(document).ready(function() {
-getComboCategorias();
-});
-     function getComboCategorias() {
-            $.ajax({
-                url: "../controller/ReporteController.php",
-                type: "post",
-                data: {
-                    key: "getComboCategorias"
-                }
-            }).done(function(resp) {
-                //console.log(resp)
-                $("#cmbIdCategoria").empty();
-                $("#cmbIdCategoria").append(resp);
+    function getComboCategorias() {
+        $.ajax({
+            url: "../controller/ReporteController.php",
+            type: "post",
+            data: {
+                key: "getComboCategorias"
+            }
+        }).done(function(resp) {
+            //console.log(resp)
+            $("#cmbIdCategoria").empty();
+            $("#cmbIdCategoria").append(resp);
 
-            }).fail(function() {
-                console.log("Error al recuperar datos (funcion getComboCategorias())")
-            });
-        }
+        }).fail(function() {
+            console.log("Error al recuperar datos (funcion getComboCategorias())")
+        });
+    }
 </script>

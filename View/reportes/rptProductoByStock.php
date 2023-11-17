@@ -7,11 +7,11 @@ require_once 'vendor/autoload.php';
 require_once '../../model/DAOProduct.php';
 
 if ($_GET) {
-    if (isset($_GET["cmbIdCategoria"])) {
-        $categoriaId = $_GET["cmbIdCategoria"];
+    if (isset($_GET["txtStock"])) {
+        $stock = $_GET["txtStock"];
 
         $dao = new DAOProduct();
-        $data = $dao->rptProductosByCategoria($categoriaId);
+        $data = $dao->rptProductosByStock($stock);
         date_default_timezone_set('America/El_Salvador');
         $imagen = file_get_contents('../img/Zephyrus.jpg');
         $imagen_data = base64_encode($imagen);
@@ -71,7 +71,7 @@ if ($_GET) {
             <hr>
             <div>
                 <br>
-                <p>LISTADO DE PRODUCTOS POR SU CATEGORIA</p>
+                <p>PRODUCTOS CON CANTIDAD MENOR O IGUAL A: ".$stock."</p>
                 <hr>
                 <!--En este div pondremos las tablas de datos-->
                 <div style='height:auto;'>

@@ -17,9 +17,9 @@ if ($_POST) {
                 $respuesta = $dao->getComboCategorias();
                 break;
 
-            }
-    }
 
+        }
+    }
 }
 
 echo $respuesta;
