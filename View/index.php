@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <title>Reportes</title>
 </head>
 
@@ -13,9 +13,15 @@
     <div class="container">
 
         <div class="card">
-            <h3>
-                REPORTES CON DOMPDF
+            <h3 class="text-center">
+                EXAMEN PRACTICO FINAL REPORTES CON DOMPDF
             </h3>
+            <h6 class="text-center">Integrantes:</h6>
+            <h6 class="text-center">Erick Alberto Garcia Marroquin</h6>
+            <h6 class="text-center">Jhon James Boyaca Uribe</h6>
+            <hr>
+            <hr>
+            <h5 class="text-center">REPORTE DE PRODUCTOS POR CATEGORIAS</h5>
             <form action="reportes/rptProductoByCategory.php" method="get" target="_blank">
                 <div class="row">
                     <div class="col-2">
@@ -30,14 +36,38 @@
                     </div>
                     <div class="col-3">
                         <button class="btn btn-primary">
-                            Reporte 1
+                            PDF Reporte Productos Por Categorias
                         </button>
                     </div>
 
                 </div>
 
             </form>
+            <script>
+                $("#cmbIdCategoria").blur(function() {
+                    var cmbIdCategoria = $("#cmbIdCategoria").val();
+                    $("#cmbIdCategoria").val(cmbIdCategoria);
+                });
+            </script>
+            <form action="../Controller/ReporteController.php" method="post" target="_blank">
+                <div class="row text-center">
+                    <div class="col-5">
+                        <input type="hidden" name="key" value="getExcel1">
+                        <input type="hidden" name="cmbIdCategoria" id="cmbIdCategoria">
+                    </div>
+                    <div class="col-3">
+                        <br>
+                        <button class="btn btn-outline-success btn-sm">
+                            <img src="img/excel.png" style="width: 30px; height: 30px;">
+                            Excel Reporte Productos Por Categorias
+                        </button>
+                    </div>
+                </div>
+
+                <br>
+            </form>
             <hr>
+            <h5 class="text-center">REPORTE DE CLIENTES MEXICANOS</h5>
             <form action="reportes/rptCustomerByCountry.php" method="get" target="_blank">
                 <div class="row">
                     <div class="col-2">
@@ -55,7 +85,30 @@
                     <div class="col-3">
                         <br>
                         <button class="btn btn-primary">
-                            Reporte 2
+                            PDF Reporte Clientes
+                        </button>
+                    </div>
+                </div>
+
+                <br>
+            </form>
+            <script>
+                $("#txtCountry").blur(function() {
+                    var country = $("#txtCountry").val();
+                    $("#country").val(country);
+                });
+            </script>
+            <form action="../Controller/ReporteController.php" method="post" target="_blank">
+                <div class="row text-center">
+                    <div class="col-5">
+                        <input type="hidden" name="key" value="getExcel2">
+                        <input type="hidden" name="country" id="country">
+                    </div>
+                    <div class="col-3">
+                        <br>
+                        <button class="btn btn-outline-success btn-sm">
+                            <img src="img/excel.png" style="width: 30px; height: 30px;">
+                            Excel Reporte Clientes
                         </button>
                     </div>
                 </div>
@@ -64,6 +117,7 @@
             </form>
 
             <hr>
+            <h5 class="text-center">REPORTE DE PRODUCTOS CON POCA EXISTENCIA</h5>
             <form action="reportes/rptProductoByStock.php" method="get" target="_blank">
                 <div class="row">
                     <div class="col-2">
@@ -71,33 +125,72 @@
                     </div>
                     <div class="col-4">
 
-                        <label for="txtCountry">
+                        <label for="txtStock">
                             Cantidad
                         </label>
-                        <input class="form-control" id="txtCountry" placeholder="Escriba la cantidad" type="number" name="txtStock"></input>
+                        <input class="form-control" id="txtStock" placeholder="Escriba la cantidad" type="number" name="txtStock"></input>
                     </div>
 
 
                     <div class="col-3">
                         <br>
                         <button class="btn btn-primary">
-                            Reporte 3
+                            PDF Reporte Productos Poca Existencia
                         </button>
                     </div>
                 </div>
 
                 <br>
             </form>
+            <script>
+                $("#txtStock").blur(function() {
+                    var stock = $("#txtStock").val();
+                    $("#stock").val(stock);
+                });
+            </script>
+            <form action="../Controller/ReporteController.php" method="post" target="_blank">
+                <div class="row text-center">
+                    <div class="col-5">
+                        <input type="hidden" name="key" value="getExcel3">
+                        <input type="hidden" name="stock" id="stock">
+                    </div>
+                    <div class="col-3">
+                        <br>
+                        <button class="btn btn-outline-success btn-sm">
+                            <img src="img/excel.png" style="width: 30px; height: 30px;">
+                            Excel Reporte Productos Poca Existencia
+                        </button>
+                    </div>
+                </div>
+                <br>
+            </form>
             <hr>
+            <h5 class="text-center">REPORTE DE CONTACTO DE EMPLEADOS</h5>
             <form action="reportes/rptEmploye.php" method="get" target="_blank">
-                <div class="row text-center">      
+                <div class="row text-center">
                     <div class="col-5">
 
-                    </div>        
+                    </div>
                     <div class="col-3">
                         <br>
                         <button class="btn btn-primary">
-                            Reporte 4
+                            Reporte Contacto Empleado
+                        </button>
+                    </div>
+                </div>
+
+                <br>
+            </form>
+            <form action="../Controller/ReporteController.php" method="post" target="_blank">
+                <div class="row text-center">
+                    <div class="col-5">
+                        <input type="hidden" name="key" value="getExcel4">
+                    </div>
+                    <div class="col-3">
+                        <br>
+                        <button class="btn btn-outline-success btn-sm">
+                            <img src="img/excel.png" style="width: 30px; height: 30px;">
+                            Excel Reporte Contacto Empleado
                         </button>
                     </div>
                 </div>
@@ -115,7 +208,7 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 

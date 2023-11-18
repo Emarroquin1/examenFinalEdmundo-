@@ -22,22 +22,23 @@ $html = "
         <head>
             <meta charset='UTF-8'>
             <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-            <title>PROD STOCK</title>
+            <title>CONTACTO DE EMPLEADOS</title>
             <style>
             .logo{
                 width: 150px;
                 height: 120px;
                  }
             .table, tr{
-            border-top: 1px solid;
-            border-bottom: 1px solid;
+                border-top: 1px solid;
+                border-bottom: 1px solid;
+                border-collapse: collapse;
     
             }
             .table > thead > th{
-            text-align: left;
+                text-align: center;
             }
             .fecha{font-size: 15px;}
-           
+            .table{font-size: 16px;width:100%;}
             .scope{padding-right: 90.5%;margin-left:1px;border-bottom: 1px solid black;padding-bottom: 5px;}
             @page { margin: 40px 70px; }
             #footer { position: fixed; left: 2px; bottom: -110px; right: Opx; height: 140px; }
@@ -63,14 +64,14 @@ $html = "
             <tr>
                 <td style='width:25%;'>" . $imagenPath . "</td>
                 <td style='width:750%; ' colspan='2'>
-            
+                <h3>REPORTE DE CONTACTOS DE EMPLEADOS</h3>
                 </td>
             </tr>
             </table>
             <hr>
             <div>
                 <br>
-                <p>LISTADO DE EMPLEADOS</p>
+                <p>REPORTE DE EL LISTADO DE EMPLEADOS</p>
                 <hr>
                 <!--En este div pondremos las tablas de datos-->
                 <div style='height:auto;'>
@@ -85,6 +86,6 @@ $html = "
 $pdf->loadHtml($html);
 $pdf->setPaper('letter', 'portrait');
 $pdf->render();
-$pdf->stream("RPT_Productos_Por_Stock", ['Attachment' => false]);
+$pdf->stream("RPT_Contacto_De_Empleados", ['Attachment' => false]);
 
         // Resto de tu código para generar y mostrar el PDF
