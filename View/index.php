@@ -43,17 +43,12 @@
                 </div>
 
             </form>
-            <script>
-                $("#cmbIdCategoria").blur(function() {
-                    var cmbIdCategoria = $("#cmbIdCategoria").val();
-                    $("#cmbIdCategoria").val(cmbIdCategoria);
-                });
-            </script>
+
             <form action="../Controller/ReporteController.php" method="post" target="_blank">
                 <div class="row text-center">
                     <div class="col-5">
                         <input type="hidden" name="key" value="getExcel1">
-                        <input type="hidden" name="cmbIdCategoria" id="cmbIdCategoria">
+                        <input type="hidden" name="cmbIdCategoriaExcel" id="cmbIdCategoriaExcel">
                     </div>
                     <div class="col-3">
                         <br>
@@ -92,6 +87,7 @@
 
                 <br>
             </form>
+
             <script>
                 $("#txtCountry").blur(function() {
                     var country = $("#txtCountry").val();
@@ -228,6 +224,13 @@
 <script>
     $(document).ready(function() {
         getComboCategorias();
+
+
+        $("#cmbIdCategoria").blur(function() {
+            var cmbIdCategoria = $("#cmbIdCategoria").val();
+            $("#cmbIdCategoriaExcel").val(cmbIdCategoria);
+        });
+
     });
 
     function getComboCategorias() {

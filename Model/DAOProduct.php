@@ -219,6 +219,7 @@ class DAOProduct
         $sql .= "INNER JOIN categories c ON p.categoryid = c.categoryid ";
         $sql .= "INNER JOIN suppliers pro ON p.supplierid = pro.supplierid ";
         $sql .= "WHERE p.categoryid = $categoryid";
+        
 
         $this->conectar();
         $res = $this->con->query($sql);

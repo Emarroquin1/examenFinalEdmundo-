@@ -32,7 +32,7 @@ if ($_POST) {
                 $respuesta = $dao3->getExcel3($stock);
                 break;
             case "getExcel1":
-                $categoryid = $_POST["cmbIdCategoria"];
+                $categoryid = $_POST["cmbIdCategoriaExcel"];
                 $respuesta = $dao3->getExcel1($categoryid);
                 break;
         }
